@@ -85,8 +85,14 @@ public class MovingBox : MonoBehaviour
         float objPosition_x = gameObject.GetComponent<Transform>().position.x;
 
         startPos = this.transform.position;
+        
+        
+        if (ableDrag == true)
+        {
+            gameObject.transform.position = new Vector2(Input.mousePosition.x/1920.0f, Input.mousePosition.y/1200.0f);
+        }
 
-        if (isUp == true)
+        else if (isUp == true)
         {
             endPos = new Vector3(7, 4.25f, 0);
             gameObject.transform.position = Vector2.MoveTowards(startPos, endPos, (25 + speed) * Time.deltaTime);
@@ -323,7 +329,7 @@ public class MovingBox : MonoBehaviour
         else
         {
             //range that object can be moved
-            if (gameObject.GetComponent<Transform>().position.x > -3.25f && gameObject.GetComponent<Transform>().position.x < 0.8f)
+            if (gameObject.GetComponent<Transform>().position.x > -3.15f && gameObject.GetComponent<Transform>().position.x < 0.8f)
             {
                 ableDrag = true;
                 mousePosOn = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);   //get position of the mouse
