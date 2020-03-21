@@ -67,9 +67,9 @@ public class UIManager : MonoBehaviour
         gamePlayTime = TotalManager.GetComponent<TotalManager_3>().gamePlayTime;
         playTime = 30 + gamePlayTime;
         feverTime = 7;
-        
+
         //speed of the box in main game
-        speed = 0.065f;
+        speed = 0.035f; //0.065f;
         StartCoroutine("SpeedSetting");
         StartCoroutine("FeverSetting");
         StartCoroutine("SetScore");
