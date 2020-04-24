@@ -16,6 +16,7 @@ public class ShopScript : CommonJob
     GameObject SelectObj;
     GameObject InfoObj;
     GameObject LockObj;
+    GameObject InsufficientObj;
 
     AudioClip canBuy;
     AudioClip cannotBuy;
@@ -91,6 +92,7 @@ public class ShopScript : CommonJob
 
         InfoObj = GameObject.Find("Info_Obj");
         LockObj = GameObject.Find("LockedObj");
+        InsufficientObj = GameObject.Find("insufficientObj");
 
         //goods object를 찾아서 넣어주고
         //고양이 / 가구 sprite를 찾아서 넣어준다
@@ -119,12 +121,12 @@ public class ShopScript : CommonJob
         want_cat = false;
         want_furniture = false;
 
-        
         backButton.SetActive(false);
         Button[0].SetActive(false);
         Button[1].SetActive(false);
         InfoObj.SetActive(false);
         LockObj.SetActive(false);
+        InsufficientObj.SetActive(false);
         SelectObj.SetActive(false);
         Shop_Background.SetActive(false);
         //Debug.Log("hi");
@@ -159,6 +161,7 @@ public class ShopScript : CommonJob
         backButton.SetActive(false);
         InfoObj.SetActive(false);
         LockObj.SetActive(false);
+        InsufficientObj.SetActive(false);
         SelectObj.SetActive(false);
         Shop_Background.SetActive(false);
 
@@ -268,15 +271,13 @@ public class ShopScript : CommonJob
     //가구 요구조건 다 만족시켰는지 확인하기
    bool judgeLocked()
     {
-        bool unlockcondition = true; // 일단 언록되어있다고 가정되고
         for (int j=0; j < 4; j++)
         {
             if (furniture[j] == -1)
-                unlockcondition = false;//하나라도 앞 네개 중 구매 안 한 것 있으면 언록시키기
+                return false;//하나라도 앞 네개 중 구매 안 한 것 있으면 언록시키기
 
         }
-
-        return unlockcondition;
+        return true;
     }
 
     //해당 오브젝트의 설명을 띄워줌
@@ -315,9 +316,11 @@ public class ShopScript : CommonJob
     //해당 오브젝트의 설명을 끔 
     public void offObjinfo()
     {
+        Debug.Log("OffObjInfo");
         //해당 오브젝트 꺼주기
         InfoObj.SetActive(false);
         LockObj.SetActive(false);
+        InsufficientObj.SetActive(false);
         turnOnCollider();
     }
 
@@ -342,12 +345,19 @@ public class ShopScript : CommonJob
 
                 ShowMoney();
                 ShowObjSeal(sprindex);
+                offObjinfo();
 
             }
             else
             {
-                if (effectvolume != 0)
+                // Show insufficient object for a second
+                Debug.Log("There is no money!");
+                Debug.Log("obj name is " + InsufficientObj.name);
+                turnOffCollider();
+                InsufficientObj.SetActive(true);
+                if (effectvolume != 0){
                     AudioSource.PlayClipAtPoint(cannotBuy, volVector);
+                }
             }
         }
         else if (want_furniture == true && furniture[sprindex] == -1)
@@ -361,9 +371,13 @@ public class ShopScript : CommonJob
                     AudioSource.PlayClipAtPoint(canBuy, volVector);
                 ShowMoney();
                 ShowObjSeal(sprindex);
+                
+                offObjinfo();
             }
             else
             {
+                
+                InsufficientObj.SetActive(true);
                 if (effectvolume != 0)
                     AudioSource.PlayClipAtPoint(cannotBuy, volVector);
             }
@@ -372,7 +386,7 @@ public class ShopScript : CommonJob
 
         }
 
-        offObjinfo();
+        //offObjinfo();
     }
 
     //몇번째 고양이를 산 건지 인덱스로 넘겨준다.
@@ -395,6 +409,7 @@ public class ShopScript : CommonJob
     //선택 과정에서 오류 없도록 콜라이더 꺼 주는 작업 수행
     void turnOffCollider()
     {
+        Debug.Log("turnoff the collider");
         backButton.GetComponent<BoxCollider2D>().enabled = false;
         for (i = 0; i < 2; i++)
         {
@@ -411,6 +426,7 @@ public class ShopScript : CommonJob
     //꺼줬던 콜라이더 켜 주는 작업 수행
     void turnOnCollider()
     {
+        Debug.Log("turn on  the collider");
         backButton.GetComponent<BoxCollider2D>().enabled = true;
         for (i = 0; i < 2; i++)
         {
