@@ -9,7 +9,6 @@ public class Main_Manager : MonoBehaviour
     GameObject AudioManager;
     GameObject DataManager;
     
-    //GameObject[] fursprObj = new GameObject[4];
     GameObject[] realFurObj = new GameObject[4];
 
     int i;
@@ -38,7 +37,6 @@ public class Main_Manager : MonoBehaviour
     {
         turnOffCollider();
         nowactiveIndex = objindex;
-        //Debug.Log("nowactiveindex is "+nowactiveIndex);
         realFurObj[objindex].SetActive(true);
         realFurObj[objindex].GetComponent<CommonJob>().initial();
 
