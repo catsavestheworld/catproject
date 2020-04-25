@@ -12,7 +12,7 @@ public class TotalManager_3 : MonoBehaviour
     GameObject gameOverScene;
     GameObject UIManager;
 
-    GameObject dragFlag;
+    GameObject tube;
     GameObject feverTimeFrame;
 
     Sprite[] gameoverSpr = new Sprite[2];
@@ -79,8 +79,8 @@ public class TotalManager_3 : MonoBehaviour
         }
         gameOverScene = GameObject.Find("GameOverScene");
 
+        tube = GameObject.Find("Tube");
         feverTimeFrame = GameObject.Find("FeverTimeFrame");
-        dragFlag = GameObject.Find("Drag_sign");
 
         mainGame.SetActive(true);
         feverTime.SetActive(false);
@@ -94,21 +94,34 @@ public class TotalManager_3 : MonoBehaviour
         feverTime.SetActive(true);
         feverPresent.SetActive(true);
         GameObject.Find("feverPresent").GetComponent<FeverTime>().fevercall = false;
-        Debug.Log("istrue");
         feverPresent.GetComponent<FeverTime>().presentAdd = 0;
         feverPresent.GetComponent<FeverTime>().SettingPos();
         mainGame.SetActive(false);                
     }
 
-    //back to main game
+    IEnumerator CallTube()
+    {
+        feverTime.SetActive(false);
+
+        float tube_x = tube.transform.position.x;
+        while (tube_x < -7.5f)
+        {
+            tube.GetComponent<Transform>().position += new Vector3(0.065f, 0, 0);
+            tube_x = tube.transform.position.x;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        mainGame.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameObject.Find("Warehouse").GetComponent<SpawnBox>().CallBox();
+    }
+
+    // end fever time and back to main game
     public void MainGameOn()
     {
         StartCoroutine(GameObject.Find("Manager").GetComponent<UIManager>().SetScore());
-        UIManager.GetComponent<UIManager>().FeverPresent();
-        feverTime.SetActive(false);
-        mainGame.SetActive(true);
-        dragFlag.SetActive(true);
-        GameObject.Find("Warehouse").GetComponent<SpawnBox>().CallBox();
+        UIManager.GetComponent<UIManager>().FeverPresent(); // add fever points and show on ui
+        StartCoroutine("CallTube");
     }
 
     //when cat falls or go downward

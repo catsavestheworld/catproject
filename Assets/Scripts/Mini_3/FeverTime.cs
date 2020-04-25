@@ -45,6 +45,7 @@ public class FeverTime : MonoBehaviour
     //setting where the present will come out when fever time starts
     public void SettingPos()
     {
+        presentBomb.SetActive(false);
         gameObject.transform.localPosition = new Vector3(-10.55f, 0.98f, 1);
 		presentBomb.transform.localPosition = new Vector3(-10.55f, 0.98f, 1);
     }

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     GameObject Manager;
 
     // for score
+    GameObject scoreUI;
     public float timer = 0;
     public Text scoreText;
     public int seconds;
@@ -55,6 +56,7 @@ public class UIManager : MonoBehaviour
         Manager = GameObject.Find("Manager");
         TotalManager = GameObject.Find("Main Camera");
         DataManager = GameObject.Find("DataManager");
+        scoreUI = GameObject.Find("Main_Canvas");
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         presentText = GameObject.Find("SpecialScore").GetComponent<Text>();
         totalText = GameObject.Find("TotalScore").GetComponent<Text>();
@@ -69,7 +71,7 @@ public class UIManager : MonoBehaviour
         feverTime = 7;
 
         //speed of the box in main game
-        speed = 0.035f; //0.065f;
+        speed = 0.065f;
         StartCoroutine("SpeedSetting");
         StartCoroutine("FeverSetting");
         StartCoroutine("SetScore");

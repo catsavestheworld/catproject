@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public class SpawnBox : MonoBehaviour
 {
     //used to create 8 boxes
-    GameObject box;
+    GameObject box, tube;
     public Queue<GameObject> inItem = new Queue<GameObject>();
     public Queue<GameObject> outItem = new Queue<GameObject>();
     int boxCount;
 
-    Vector3 spawnPlace = new Vector3(-11.5f, -0.2f, 1); //where the object is spawned (on top of the conveyor belt)
+    Vector3 spawnPlace = new Vector3(-11.5f, -0.35f, 1); //where the object is spawned (on top of the conveyor belt)
 
-    GameObject dragFlag;
     GameObject feverTimeFrame;
     GameObject dust;
 
@@ -22,12 +21,12 @@ public class SpawnBox : MonoBehaviour
     
     void Start ()
     {
+        tube = GameObject.Find("Tube");
         box = GameObject.Find("Box");
         boxSpr = Resources.Load<Sprite>("Sprites/Item/Object_box");
 
         feverTimeFrame = GameObject.Find("FeverTimeFrame");
         dust = GameObject.Find("DustUp");
-        dragFlag = GameObject.Find("Drag_sign");
 
         inItem.Enqueue(box);
 
@@ -59,12 +58,23 @@ public class SpawnBox : MonoBehaviour
     {
         obj = outItem.Dequeue();
         inItem.Enqueue(obj);//큐에 넣어주고
-        obj.SetActive(false);//disable
+    }
+
+    IEnumerator OrganizeTube()
+    {
+        float tube_x = tube.transform.position.x;
+        while (tube_x > -14.8f)
+        {
+            tube.GetComponent<Transform>().position -= new Vector3(0.065f, 0, 0);
+            tube_x = tube.transform.position.x;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     IEnumerator CheckBoxNum()
     {
         GameObject box_organize = outItem.Dequeue();
+        box_organize.GetComponent<SpriteRenderer>().sortingOrder = 0;
         inItem.Enqueue(box_organize);
         box_organize.GetComponent<MovingBox>().SetBool();
         box_organize.SetActive(false);
@@ -73,11 +83,14 @@ public class SpawnBox : MonoBehaviour
 
         if (boxCount == 9)
         {
-            dust.SetActive(false);
-            dragFlag.SetActive(false);
+            // get ready for Fever Time
             feverTimeFrame.SetActive(true);
+
+            yield return new WaitForSeconds(0.3f);
+
+            StartCoroutine("OrganizeTube");
             Debug.Log("Done");
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.9f);
             
             feverTimeFrame.SetActive(false);            
             GameObject.Find("Main Camera").GetComponent<TotalManager_3>().IsFever();

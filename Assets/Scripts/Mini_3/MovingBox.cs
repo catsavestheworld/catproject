@@ -65,7 +65,7 @@ public class MovingBox : MonoBehaviour
         fakeFallSpr[2] = Resources.Load<Sprite>("Sprites/Item/Object_fake_" + 3 + "_drop");
         catSpr = Resources.Load<Sprite>("Sprites/Item/Object_cat_white");
         catFallSpr = Resources.Load<Sprite>("Sprites/Item/Object_cat_white_drop");
-        presentSpr = Resources.Load<Sprite>("Sprites/fever_score");
+        presentSpr = Resources.Load<Sprite>("Sprites/Item/Object_present");
         boxSpr = Resources.Load<Sprite>("Sprites/Item/Object_box");
         dustSpr = Resources.Load<Sprite>("Sprites/Dust");
 
@@ -89,17 +89,38 @@ public class MovingBox : MonoBehaviour
         
         if (ableDrag == true)
         {
-            gameObject.transform.position = new Vector2(Input.mousePosition.x/1920.0f, Input.mousePosition.y/1200.0f);
+            var screenPoint = Input.mousePosition;
+            screenPoint.z = 10.0f; //distance of the plane from the camera
+            var movePoint = Camera.main.ScreenToWorldPoint(screenPoint);
+
+            // limit player from moving the box around the screen freely
+            if (movePoint.x > 4.5f) 
+            {
+                movePoint.x = 4.5f;
+            }
+            else if(movePoint.x < -1.6f){
+                movePoint.x = -1.6f;
+            }
+            if(movePoint.y < -2.9f)
+            {
+                movePoint.y = -2.9f;
+            }
+
+            transform.position = movePoint;
+            //gameObject.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
 
         else if (isUp == true)
         {
-            endPos = new Vector3(7, 4.25f, 0);
+            endPos = new Vector3(6, 3.39f, 0);
             gameObject.transform.position = Vector2.MoveTowards(startPos, endPos, (25 + speed) * Time.deltaTime);
+            float objPosition_y = gameObject.GetComponent<Transform>().position.y;
 
-            if (objPosition_x > 5)
+            if (objPosition_x > 5 && 3.29f < objPosition_y && objPosition_y <3.49f)
             {
-                dust.transform.position = new Vector3(5.5f, 3.8f, 0);
+                this.GetComponent<SpriteRenderer>().sortingOrder = 0; // so that the box layer goes below the shelf
+
+                dust.transform.position = new Vector3(endPos.x-0.04f, 3.72f, 0);
                 StartCoroutine("DustEffect");
                 isUp = false;
             }
@@ -107,12 +128,15 @@ public class MovingBox : MonoBehaviour
 
         else if (isDown == true)
         {
-            endPos = new Vector3(5.1f, -1.45f, 0);
+            endPos = new Vector3(5.5f, -1.46f, 0);
             gameObject.transform.position = Vector2.MoveTowards(startPos, endPos, (25 + speed) * Time.deltaTime);
+            float objPosition_y = gameObject.GetComponent<Transform>().position.y;
 
-            if (objPosition_x > 5)
+            if (objPosition_x > 5 && -1.56f < objPosition_y && objPosition_y < -1.36f)
             {
-                dust.transform.position = new Vector3(5.5f, -2.1f, 0);
+                this.GetComponent<SpriteRenderer>().sortingOrder = 0;  // so that box layer goes below the conveyor belt
+
+                dust.transform.position = new Vector3(endPos.x+0.03f, -2.1f, 0);
                 StartCoroutine("DustEffect");
                 isDown = false;
             }
@@ -216,6 +240,10 @@ public class MovingBox : MonoBehaviour
                 break;
 
             case "Falling":
+                if (ableDrag == true)
+                {
+                    break;
+                }
                 if (mySprite == catSpr)
                 {
                     gameObject.GetComponent<SpriteRenderer>().sprite = catFallSpr;
@@ -297,13 +325,13 @@ public class MovingBox : MonoBehaviour
                 break;
 
             case "OnBelt":
-                if (mySprite == catFallSpr)
+                if (mySprite == catFallSpr || mySprite == catSpr)
                 {
                     GameObject.Find("Main Camera").GetComponent<TotalManager_3>().CatEnd();
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    if (mySprite == fakeFallSpr[i])
+                    if (mySprite == fakeFallSpr[i] || mySprite == fakeSpr[i])
                     {
                         GameObject.Find("Main Camera").GetComponent<TotalManager_3>().CatEnd();
                         break;
@@ -316,10 +344,27 @@ public class MovingBox : MonoBehaviour
     //when the mouse is clicked 
     void OnMouseDown()
     {
+            //range that object can be moved
+            if (gameObject.GetComponent<Transform>().position.x > -3.15f && gameObject.GetComponent<Transform>().position.x < 0.8f)
+            {
+                this.GetComponent<SpriteRenderer>().sortingOrder = 4;  // so that box layer goes upward the conveyor belt
+                ableDrag = true;
+                mousePosOn = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);   //get position of the mouse
+            }
+       
+    }
+
+    //moving box to upper or down coneyor belt according to the direction of the swipe
+    void OnMouseUp()
+    {
         if (mySprite == presentSpr)
         {
-            gameObject.SetActive(false);
-            GameObject.Find("Warehouse").GetComponent<SpawnBox>().OrganizeBox(gameObject);
+            // organize the present box
+            this.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            ableDrag = false;
+            this.gameObject.SetActive(false);
+
+            GameObject.Find("Warehouse").GetComponent<SpawnBox>().OrganizeBox(this.gameObject);
             GameObject.Find("Manager").GetComponent<UIManager>().PresentPlus();
             //PresentClicking@@@@
             if (effectvolume != 0)
@@ -328,36 +373,25 @@ public class MovingBox : MonoBehaviour
 
         else
         {
+            Vector3 mousePosOff = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);   //get position of the mouse
+
+            Vector3 direction = mousePosOff - mousePosOn;
+
             //range that object can be moved
-            if (gameObject.GetComponent<Transform>().position.x > -3.15f && gameObject.GetComponent<Transform>().position.x < 0.8f)
+            if (ableDrag == true)
             {
-                ableDrag = true;
-                mousePosOn = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);   //get position of the mouse
+                if (direction.y > 0)    //swipe upward
+                {
+                    isUp = true;
+                }
+
+                else //swipe downward
+                {
+                    isDown = true;
+                }
+
+                ableDrag = false;
             }
-        }
-    }
-
-    //moving box to upper or down coneyor belt according to the direction of the swipe
-    void OnMouseUp()
-    {
-        Vector3 mousePosOff = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);   //get position of the mouse
-
-        Vector3 direction = mousePosOff - mousePosOn;
-
-        //range that object can be moved
-        if (ableDrag == true)
-        {
-            if (direction.y > 0)    //swipe upward
-            {
-                isUp = true;
-            }
-
-            else //swipe downward
-            {
-                isDown = true;
-            }
-
-            ableDrag = false;
         }
     }
 
@@ -365,5 +399,6 @@ public class MovingBox : MonoBehaviour
     {
         isUp = false;
         isDown = false;
+        ableDrag = false;
     }
 }
