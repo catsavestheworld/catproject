@@ -11,6 +11,7 @@ public class TimeScore : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Time.timeScale = 1;
         Debug.Log("start in timescore");
         temp = 0;
         time = 0;
