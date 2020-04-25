@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Minigame3_Mananger : MonoBehaviour {
 
+    public GameObject pauseBut;
+
     GameObject AudioManager;
     GameObject DataManager;
     GameObject FeverSign;
@@ -61,6 +63,8 @@ public class Minigame3_Mananger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        Time.timeScale = 1;
         
         buycat = DataManager.GetComponent<ControlGameData>().getBuycat();
         tempcatindex = 0;
@@ -166,6 +170,9 @@ public class Minigame3_Mananger : MonoBehaviour {
 
     public void callFeverTime()
     {
+        //일시정지 비허용
+        pauseBut.SetActive(false);
+
         if (catmanagerObj.GetComponent<CatManager>().realWaitTime >= 0)
             catmanagerObj.GetComponent<CatManager>().waitTime = catmanagerObj.GetComponent<CatManager>().realWaitTime;
         catmanagerObj.GetComponent<CatManager>().nowWait = false;
@@ -183,6 +190,9 @@ public class Minigame3_Mananger : MonoBehaviour {
 
     public void backtoGame()
     {
+        //일시정지 허용
+        pauseBut.SetActive(true);
+
         speacialscore += speacialScoreObj.GetComponent<FeverTimeScript>().touchnum;
         speacialScoreObj.GetComponent<FeverTimeScript>().touchnum = 0;
         normalscore += bonusAfterFever;

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class mini1_TotalManager : MonoBehaviour {
 
+    public GameObject pauseBut;
+
     GameObject AudioManager;
 
     GameObject GAMEOVER;
@@ -120,6 +122,9 @@ public class mini1_TotalManager : MonoBehaviour {
         if (time == gametime) //피버타임 준비
         {   // 행성 바깥으로 이동 & 플레이어 중간으로 이동(터치막기)
 
+            //일시정지 막기
+            pauseBut.SetActive(false);
+
             Player.GetComponent<Collider2D>().enabled = false;
 
             fever_text.SetActive(true);
@@ -188,6 +193,9 @@ public class mini1_TotalManager : MonoBehaviour {
             Go.text = "G O !";
 
             time = 0;
+
+            //일시정지 허용
+            pauseBut.SetActive(true);
 
            
         }
