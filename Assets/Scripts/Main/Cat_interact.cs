@@ -19,7 +19,7 @@ public class Cat_interact : MonoBehaviour
 
         for (int i = 0; i < catInteractSpr.Length; i++)
         {
-            catInteractSpr[i] = new Sprite[15][];//각각 위치 네개씩
+            catInteractSpr[i] = new Sprite[21][];//각각 위치 네개씩
             for (int j = 0; j < catInteractSpr[i].Length; j++)
             {
                 catInteractSpr[i][j] = new Sprite[2];
