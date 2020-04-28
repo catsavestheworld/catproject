@@ -50,6 +50,7 @@ public class ShopScript : CommonJob
       소유한 금액
      */
     int[] buycat = new int[8]; // -1,0,1 세가지. 
+    int[] data_furniture = new int[9];
     int[] furniture = new int[8]; //구매여부 및 디벨롭 여부 판가름할것. -1(구매안함)/012(구매&레벨업에 따라 1/2/3), 설치한 것은 레벨따라 345
     int money;
 
@@ -141,7 +142,10 @@ public class ShopScript : CommonJob
 
         money = DataManager.GetComponent<ControlGameData>().getMoney();
         buycat= DataManager.GetComponent<ControlGameData>().getBuycat();
-        furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
+        data_furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
+        for(int i=0;i<furniture.Length;i++){
+            furniture[i] = data_furniture[i];
+        }
 
         Shop_Background.SetActive(true);
         Button[0].SetActive(true);

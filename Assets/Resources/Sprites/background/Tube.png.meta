@@ -44,7 +44,11 @@ TextureImporter:
     wrapW: -1
 =======
     wrapW: 1
+<<<<<<< HEAD
 >>>>>>> 62ff63c... add untracked file
+=======
+>>>>>>> save wip
+>>>>>>> Update some scripts for deal with added furniture object
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -111,7 +115,11 @@ TextureImporter:
     textureCompression: 0
 =======
     textureCompression: 1
+<<<<<<< HEAD
 >>>>>>> 62ff63c... add untracked file
+=======
+>>>>>>> save wip
+>>>>>>> Update some scripts for deal with added furniture object
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0

@@ -11,10 +11,11 @@ public class ChangeCameraPos : MonoBehaviour
     GameObject DataManager;
     GameObject CatObj;
     GameObject MenuObj;
+    GameObject[] MainObj = new GameObject[4];
 
     Button ArrowUI;
 
-    int[] furniture = new int[8];
+    int[] furniture = new int[9];
 
     // Use this for initialization
     void Start()
@@ -25,6 +26,10 @@ public class ChangeCameraPos : MonoBehaviour
         MenuObj = GameObject.Find("Menu");
         DataManager = GameObject.Find("DataManager");
         CatObj = GameObject.Find("Cat");
+        MainObj[0] = GameObject.Find("Shop");
+        MainObj[1] = GameObject.Find("Setting");
+        MainObj[2] = GameObject.Find("MiniGame");
+        MainObj[3] = GameObject.Find("Collection");
 
         judgeLocked();
     }
@@ -47,11 +52,17 @@ public class ChangeCameraPos : MonoBehaviour
         {
             Camera.transform.Translate(+21f, 0, 0);
             MenuObj.transform.Translate(+21f, 0, 0);
+            for(int i=0;i<MainObj.Length;i++){
+                MainObj[i].transform.Translate(+21f, 0, 0);
+            }
         }
         else
         {
             Camera.transform.Translate(-21f, 0, 0);
             MenuObj.transform.Translate(-21f, 0, 0);
+            for(int i=0;i<MainObj.Length;i++){
+                MainObj[i].transform.Translate(-21f, 0, 0);
+            }
         }
 
         CatObj.GetComponent<Cat_interact>().CatVolSetting();
@@ -60,29 +71,26 @@ public class ChangeCameraPos : MonoBehaviour
     void judgeLocked()
     {
         furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
-        bool unlockcondition = true; // 일단 언록되어있다고 가정되고
         for (int j = 0; j < 4; j++)
         {
-            if (furniture[j] == -1)
-                unlockcondition = false;//하나라도 앞 네개 중 구매 안 한 것 있으면 언록시키기
+            if (furniture[j] == -1){
+                //하나라도 앞 네개를 구매하지 않았으면 lock되어있는 상황임
+                turnOffObj();
+                return;
+            }
         }
-        if (unlockcondition == true)
-        {
-            turnOnObj();
-        }
-        else
-            turnOffObj();
+        // unlock
+        turnOnObj();
     }
 
     public bool returnLocked()
     {
         furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
-        bool unlockcondition = true; // 일단 언록되어있다고 가정되고
         for (int j = 0; j < 4; j++)
         {
             if (furniture[j] == -1)
-                unlockcondition = false;//하나라도 앞 네개 중 구매 안 한 것 있으면 언록시키기
+                return false;//하나라도 앞 네개 중 구매 안 한 것 있으면 locked 상태임
         }
-        return unlockcondition;
+        return true;
     }
 }

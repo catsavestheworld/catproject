@@ -217,19 +217,17 @@ public class PlacementScript : MonoBehaviour
 
     bool judgeLocked()
     {
-        int[] judgefurniture = new int[8];
+        int[] judgefurniture = new int[9];
 
         judgefurniture = DataManager.GetComponent<ControlGameData>().getFurniture();
-
-        bool unlockcondition = true; // 일단 언록되어있다고 가정되고
         for (int j = 0; j < 4; j++)
         {
             if (judgefurniture[j] == -1)
-                unlockcondition = false;//하나라도 앞 네개 중 구매 안 한 것 있으면 록시키기
+                return false;
 
         }
 
-        return unlockcondition;
+        return true;
     }
 
     public void OffCatCollider()

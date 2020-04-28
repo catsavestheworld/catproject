@@ -47,6 +47,8 @@ public class CollectionScript : CommonJob
       소유한 금액
      */
     int[] buycat = new int[8]; //정수를 읽어와서 이진수로 나누면서 판단해야 함 --> 128 : 8번째만 구매함
+    
+    int[] data_furniture = new int[9];
     int[] furniture = new int[8]; //구매여부 및 디벨롭 여부 판가름할것. -1(구매안함)/012(구매&레벨업에 따라 1/2/3), 설치한 것은 레벨따라 345
     int[] playnum = new int[3];
     int[] puzzle = new int[6];//각 미니게임 3개마다 퍼즐 2개, 각 퍼즐은 총 8개 조각 --> 이는 이진수로 저장되어있음.
@@ -146,7 +148,10 @@ public class CollectionScript : CommonJob
     {
         Debug.Log("initial called");
         //데이터를 읽어오고 초기화시키기
-        furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
+        data_furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
+        for(int i=0;i<furniture.Length;i++){
+            furniture[i] = data_furniture[i];
+        }
         playnum = DataManager.GetComponent<ControlGameData>().getPlaynum();
         buycat = DataManager.GetComponent<ControlGameData>().getBuycat();
         puzzle = DataManager.GetComponent<ControlGameData>().getPuzzle();
@@ -250,6 +255,8 @@ public class CollectionScript : CommonJob
                 }
                 break;
             case 1:
+            // FIXME : 현 상황에서는 sprite가 8개기 때문에 goods인 sprite가 8개만 뜨게 되어있음. 
+            // 짜다보니까 뭔가 수정할 사항들이 점점 커지고?있음.. 예외처리 박아야 하는 게 너무 많음
                 for (i = 0, goodsindex = 0; i < Goods.Length; i++)
                 {
                     if (furniture[i] != -1)
