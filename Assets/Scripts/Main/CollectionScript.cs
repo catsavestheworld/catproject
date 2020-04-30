@@ -18,7 +18,7 @@ public class CollectionScript : CommonJob
     GameObject[] Category = new GameObject[4];
 
     GameObject GoodsParent;
-    GameObject[] Goods = new GameObject[8];
+    GameObject[] Goods = new GameObject[10];
     GameObject StoryParent;
     GameObject[] Story = new GameObject[3];
     GameObject PuzzleParent;
@@ -33,13 +33,14 @@ public class CollectionScript : CommonJob
     Sprite[] BaseSpr = new Sprite[4];
     Sprite[] catSpr = new Sprite[8];
     Sprite[] catInfoSpr = new Sprite[8];
-    Sprite[] furnitureSpr = new Sprite[8];
-    Sprite[] furnitureInfoSpr = new Sprite[8];
+    Sprite[] furnitureSpr = new Sprite[9];
+    Sprite[] furnitureInfoSpr = new Sprite[9];
     Sprite[] placementSpr = new Sprite[2];
     Sprite[] puzzlebaseSpr = new Sprite[6];
     Sprite[][] puzzlepieceSpr = new Sprite[6][];
 
     Sprite nothinggoodsSpr;
+    Sprite willbeUpdated;
 
     /* 콜렉션에 필요한, 데이터에서 읽어와야 하는 정보들
       고양이의 구매 여부
@@ -47,9 +48,8 @@ public class CollectionScript : CommonJob
       소유한 금액
      */
     int[] buycat = new int[8]; //정수를 읽어와서 이진수로 나누면서 판단해야 함 --> 128 : 8번째만 구매함
-    
-    int[] data_furniture = new int[9];
-    int[] furniture = new int[8]; //구매여부 및 디벨롭 여부 판가름할것. -1(구매안함)/012(구매&레벨업에 따라 1/2/3), 설치한 것은 레벨따라 345
+
+    int[] furniture = new int[9]; //구매여부 및 디벨롭 여부 판가름할것. -1(구매안함)/012(구매&레벨업에 따라 1/2/3), 설치한 것은 레벨따라 345
     int[] playnum = new int[3];
     int[] puzzle = new int[6];//각 미니게임 3개마다 퍼즐 2개, 각 퍼즐은 총 8개 조각 --> 이는 이진수로 저장되어있음.
 
@@ -66,7 +66,7 @@ public class CollectionScript : CommonJob
         base.Start();
 
         AudioManager = GameObject.Find("AudioManager");
-        
+
 
         sprdir = "Main/ShopAndCollection/";
 
@@ -80,22 +80,26 @@ public class CollectionScript : CommonJob
         Category[3] = GameObject.Find("CollectionCategory_P");
 
         GoodsParent = GameObject.Find("C_Goods");
+
+        for(i=0;i<Goods.Length;i++){
+            Goods[i] = GameObject.Find("C_Goods_" + i);
+        }
         for (i = 0; i < 4; i++)
         {
             BaseSpr[i] = Resources.Load<Sprite>("Main/CollectionSprite/" + "base_" + i);
 
-            Goods[i] = GameObject.Find("C_Goods_" + i);
-            Goods[i + 4] = GameObject.Find("C_Goods_" + (i + 4));
-
-            catSpr[i] = Resources.Load<Sprite>(sprdir + "Cat_" + i);
-            catSpr[i + 4] = Resources.Load<Sprite>(sprdir + "Cat_" + (i + 4));
-            furnitureSpr[i] = Resources.Load<Sprite>(sprdir + "Furniture_" + i);
-            furnitureSpr[i + 4] = Resources.Load<Sprite>(sprdir + "Furniture_" + (i + 4));
+            catSpr[i] = Resources.Load<Sprite>(sprdir + "Collection_Cat_" + i);
+            catSpr[i + 4] = Resources.Load<Sprite>(sprdir + "Collection_Cat_" + (i + 4));
+            furnitureSpr[i] = Resources.Load<Sprite>(sprdir + "Collection_F_" + i);
+            furnitureSpr[i + 4] = Resources.Load<Sprite>(sprdir + "Collection_F_" + (i + 4));
             catInfoSpr[i] = Resources.Load<Sprite>(sprdir + "Info_C_" + i);
             catInfoSpr[i + 4] = Resources.Load<Sprite>(sprdir + "Info_C_" + (i + 4));
             furnitureInfoSpr[i] = Resources.Load<Sprite>(sprdir + "Info_F_" + i);
             furnitureInfoSpr[i + 4] = Resources.Load<Sprite>(sprdir + "Info_F_" + (i + 4));
         }
+        furnitureSpr[8] = Resources.Load<Sprite>(sprdir + "Collection_F_8");
+        furnitureInfoSpr[8] = Resources.Load<Sprite>(sprdir + "Info_F_8");
+        willbeUpdated = Resources.Load<Sprite>(sprdir+"willbeUpdated");
 
         StoryParent = GameObject.Find("C_Story");
         for (i = 0; i < Story.Length; i++)
@@ -113,9 +117,9 @@ public class CollectionScript : CommonJob
             realpuzzle[i] = new int[8];
             puzzlepieceSpr[i] = new Sprite[8];
             puzzlebaseSpr[i] = Resources.Load<Sprite>("Main/CollectionSprite/Puzzle/" + "Puzzle_Base_" + i);
-            for(int j = 0; j < 8; j++)
+            for (int j = 0; j < 8; j++)
             {
-                puzzlepieceSpr[i][j] = Resources.Load<Sprite>("Main/CollectionSprite/Puzzle/Puzzle_piece_" + i+ "/Puzzle_" + j);
+                puzzlepieceSpr[i][j] = Resources.Load<Sprite>("Main/CollectionSprite/Puzzle/Puzzle_piece_" + i + "/Puzzle_" + j);
             }
         }
 
@@ -148,10 +152,7 @@ public class CollectionScript : CommonJob
     {
         Debug.Log("initial called");
         //데이터를 읽어오고 초기화시키기
-        data_furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
-        for(int i=0;i<furniture.Length;i++){
-            furniture[i] = data_furniture[i];
-        }
+        furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
         playnum = DataManager.GetComponent<ControlGameData>().getPlaynum();
         buycat = DataManager.GetComponent<ControlGameData>().getBuycat();
         puzzle = DataManager.GetComponent<ControlGameData>().getPuzzle();
@@ -165,13 +166,13 @@ public class CollectionScript : CommonJob
         for (i = 0; i < 6; i++)
         {
             int tempPuzzle = puzzle[i];
-            for(int j = 0; j < 8; j++)
+            for (int j = 0; j < 8; j++)
             {
                 realpuzzle[i][j] = tempPuzzle % 2;
                 tempPuzzle /= 2;
             }
         }
-        
+
 
         //기본적으로 고양이를 켜고 시작하는 것으로.
         SettingCategory(0);
@@ -210,7 +211,7 @@ public class CollectionScript : CommonJob
                 BaseObj.GetComponent<SpriteRenderer>().sprite = BaseSpr[i];
                 activecategory[i] = true;
             }
-                
+
             else
                 activecategory[i] = false;
         }
@@ -228,7 +229,7 @@ public class CollectionScript : CommonJob
             PuzzleParent.SetActive(false);
             StoryParent.SetActive(true);
         }
-        else if(index == 3)
+        else if (index == 3)
         {
             GoodsParent.SetActive(false);
             StoryParent.SetActive(false);
@@ -239,41 +240,47 @@ public class CollectionScript : CommonJob
 
     void showGoods(int index)
     {
-        int goodsindex = 0;
-        //sprite 세팅
         switch (index)
         {
             case 0:
-                for (i = 0, goodsindex = 0; i < Goods.Length; i++)
+                for (i = 0; i < Goods.Length; i++)
                 {
+                    if(i >= catSpr.Length){
+                        Debug.Log("cat exceeded  : i is "+i);
+                        Goods[i].GetComponent<SpriteRenderer>().sprite = willbeUpdated;
+                        continue;
+                    }
                     if (buycat[i] != -1)
                     {
-                        Goods[goodsindex].GetComponent<SpriteRenderer>().sprite = catSpr[i];
-                        goodsindex++;
+                        Goods[i].GetComponent<SpriteRenderer>().sprite = catSpr[i];
+                    }
+                    else{
+
                     }
 
                 }
                 break;
             case 1:
-            // FIXME : 현 상황에서는 sprite가 8개기 때문에 goods인 sprite가 8개만 뜨게 되어있음. 
-            // 짜다보니까 뭔가 수정할 사항들이 점점 커지고?있음.. 예외처리 박아야 하는 게 너무 많음
-                for (i = 0, goodsindex = 0; i < Goods.Length; i++)
+                // FIXME : 현 상황에서는 sprite가 8개기 때문에 goods인 sprite가 8개만 뜨게 되어있음. 
+                // 짜다보니까 뭔가 수정할 사항들이 점점 커지고?있음.. 예외처리 박아야 하는 게 너무 많음
+                for (i = 0; i < Goods.Length; i++)
                 {
+                    if(i >= furniture.Length){
+                        Debug.Log("furniture exceeded  : i is "+i);
+                        Goods[i].GetComponent<SpriteRenderer>().sprite = willbeUpdated;
+                        continue;
+                    }
                     if (furniture[i] != -1)
                     {
-                        Goods[goodsindex].GetComponent<SpriteRenderer>().sprite = furnitureSpr[i];
-                        goodsindex++;
+                        Goods[i].GetComponent<SpriteRenderer>().sprite = furnitureSpr[i];
+                    }
+                    else{
+                        Goods[i].GetComponent<SpriteRenderer>().sprite = nothinggoodsSpr;
                     }
                 }
                 break;
             default:
                 break;
-        }
-
-
-        for (int j = goodsindex; j < Goods.Length; j++)
-        {
-            Goods[j].GetComponent<SpriteRenderer>().sprite = nothinggoodsSpr;
         }
     }
 
@@ -283,7 +290,7 @@ public class CollectionScript : CommonJob
         for (i = 0; i < 8; i++)
         {
             //Debug.Log(realpuzzle[index][i]);
-            if(realpuzzle[index][i] == 0)
+            if (realpuzzle[index][i] == 0)
             {
                 Puzzle[i].GetComponent<SpriteRenderer>().sprite = null;
             }
@@ -304,7 +311,7 @@ public class CollectionScript : CommonJob
             if (nowIndex != 0)
                 showPuzzle(--nowIndex);
         }
-        else if(dir == "Right")
+        else if (dir == "Right")
         {
             if (nowIndex != 5)
                 showPuzzle(++nowIndex);
@@ -313,16 +320,22 @@ public class CollectionScript : CommonJob
 
     public void showInfo(int num)//해당 오브젝트에서 자신의 spritenum 잘라서 보내기{
     {
+        if (activecategory[0])
+        {
+            if (num >= catSpr.Length){
+                return;
+            }
+        }
+        else if(activecategory[1]){
+            if(num >= furniture.Length){
+                return;
+            }
+        }
         turnOffCollider("Goods");
         //Debug.Log(activecategory[num]);
-
         InfoObj.SetActive(true);
-        if(activecategory[0] == true)
+        if (activecategory[0] == true)
         {
-            Debug.Log("고양이!");
-            Debug.Log(buycat[num]);
-            Debug.Log(placementSpr[buycat[num]].name);
-            
             //고양이
             InfoObj.GetComponent<SpriteRenderer>().sprite = catInfoSpr[num];
             InfoButton_Placement.GetComponent<SpriteRenderer>().sprite = placementSpr[buycat[num]];
@@ -345,13 +358,13 @@ public class CollectionScript : CommonJob
   해당 오브젝트의 index num을 전달해주니까 가구인지/고양이인지 체크해서 배치*/
     public void placeObj(int index)
     {
-        if(activecategory[0] == true)
+        if (activecategory[0] == true)
         {
             //고양이
             buycat[index] = (buycat[index] + 1) % 2;
             InfoButton_Placement.GetComponent<SpriteRenderer>().sprite = placementSpr[buycat[index]];
         }
-        else if(activecategory[1] == true)
+        else if (activecategory[1] == true)
         {
             //가구
             furniture[index] = (furniture[index] + 1) % 2;
@@ -372,7 +385,7 @@ public class CollectionScript : CommonJob
 
             turnOnCollider("Story");
         }
-            
+
     }
 
     public void finishStory()
