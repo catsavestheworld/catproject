@@ -77,6 +77,8 @@ public class MovingBox : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return;
+
         mySprite = this.GetComponent<SpriteRenderer>().sprite;
 
         timer = GameObject.Find("Manager").GetComponent<UIManager>().timer;
@@ -192,12 +194,12 @@ public class MovingBox : MonoBehaviour
     //for the cat to walk (changing sprite constantly)
     IEnumerator WalkingCat()
     {
-        while (true)
-        {
+        //while (true)
+        //{
             walkindex = (walkindex + 1) % 2;
             gameObject.GetComponent<SpriteRenderer>().sprite = catWalking[walkindex];
             yield return new WaitForSeconds(0.45f);
-        }
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D other)

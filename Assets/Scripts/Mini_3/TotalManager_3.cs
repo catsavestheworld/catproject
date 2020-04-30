@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TotalManager_3 : MonoBehaviour
 {
+    //일시정지
+    public GameObject pauseBtn;
+
     GameObject AudioManager;
     GameObject mainGame;
     GameObject feverTime;
@@ -40,6 +43,8 @@ public class TotalManager_3 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Time.timeScale = 1;
+
         appliedEffect = DataManager.GetComponent<GetCatEffect>().SettingCatEffect();
 
         //게임 끝나고 score 에 곱해주는 배수
@@ -91,6 +96,9 @@ public class TotalManager_3 : MonoBehaviour
     //turn on FEVER
     public void IsFever()
     {
+        //일시정지 비허용
+        pauseBtn.SetActive(false);
+
         feverTime.SetActive(true);
         feverPresent.SetActive(true);
         GameObject.Find("feverPresent").GetComponent<FeverTime>().fevercall = false;
@@ -101,6 +109,11 @@ public class TotalManager_3 : MonoBehaviour
 
     IEnumerator CallTube()
     {
+        //일시정지 허용
+        pauseBtn.SetActive(true);
+
+        StartCoroutine(GameObject.Find("Manager").GetComponent<UIManager>().SetScore());
+        UIManager.GetComponent<UIManager>().FeverPresent();
         feverTime.SetActive(false);
 
         float tube_x = tube.transform.position.x;
