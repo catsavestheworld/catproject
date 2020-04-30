@@ -144,13 +144,10 @@ public class CollectionScript : CommonJob
         PuzzleParent.SetActive(false);
         GoodsParent.SetActive(false);
         BaseObj.SetActive(false);
-
-        //Debug.Log(realpuzzle.Length);
     }
 
     public override void initial()
     {
-        Debug.Log("initial called");
         //데이터를 읽어오고 초기화시키기
         furniture = DataManager.GetComponent<ControlGameData>().getFurniture();
         playnum = DataManager.GetComponent<ControlGameData>().getPlaynum();
@@ -159,7 +156,6 @@ public class CollectionScript : CommonJob
 
         cannotshow = AudioManager.GetComponent<Main_AudioManager>().Shop_cannotbuy;
         volVector = AudioManager.GetComponent<Main_AudioManager>().effectVector;
-        Debug.Log(volVector);
         effectvolume = AudioManager.GetComponent<Main_AudioManager>().effectVol;
 
         //총 6개의 퍼즐에 대해 해당 퍼즐의 조각들을 
@@ -246,7 +242,6 @@ public class CollectionScript : CommonJob
                 for (i = 0; i < Goods.Length; i++)
                 {
                     if(i >= catSpr.Length){
-                        Debug.Log("cat exceeded  : i is "+i);
                         Goods[i].GetComponent<SpriteRenderer>().sprite = willbeUpdated;
                         continue;
                     }
@@ -261,12 +256,9 @@ public class CollectionScript : CommonJob
                 }
                 break;
             case 1:
-                // FIXME : 현 상황에서는 sprite가 8개기 때문에 goods인 sprite가 8개만 뜨게 되어있음. 
-                // 짜다보니까 뭔가 수정할 사항들이 점점 커지고?있음.. 예외처리 박아야 하는 게 너무 많음
                 for (i = 0; i < Goods.Length; i++)
                 {
                     if(i >= furniture.Length){
-                        Debug.Log("furniture exceeded  : i is "+i);
                         Goods[i].GetComponent<SpriteRenderer>().sprite = willbeUpdated;
                         continue;
                     }
@@ -289,7 +281,6 @@ public class CollectionScript : CommonJob
         PuzzleBaseObj.GetComponent<SpriteRenderer>().sprite = puzzlebaseSpr[index];
         for (i = 0; i < 8; i++)
         {
-            //Debug.Log(realpuzzle[index][i]);
             if (realpuzzle[index][i] == 0)
             {
                 Puzzle[i].GetComponent<SpriteRenderer>().sprite = null;
@@ -305,7 +296,6 @@ public class CollectionScript : CommonJob
     {
         string sprname = PuzzleBaseObj.GetComponent<SpriteRenderer>().sprite.name;
         int nowIndex = int.Parse(sprname.Substring(sprname.Length - 1));
-        Debug.Log(dir);
         if (dir == "Left")
         {
             if (nowIndex != 0)
@@ -332,7 +322,6 @@ public class CollectionScript : CommonJob
             }
         }
         turnOffCollider("Goods");
-        //Debug.Log(activecategory[num]);
         InfoObj.SetActive(true);
         if (activecategory[0] == true)
         {
@@ -375,7 +364,6 @@ public class CollectionScript : CommonJob
     public void showStory(int num)//해당 오브젝트에서 자신의 스테이지num 잘라서 보내기
     {
         turnOffCollider("Story");
-        Debug.Log(num);
         if (playnum[num] != 0)
             IntroObj.GetComponent<ShowingIntro>().callingIntro(gameObject, num);
         else

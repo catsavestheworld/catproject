@@ -64,7 +64,6 @@ public class SettingScript : CommonJob
     public override void initial()
     {
         //데이터를 읽어오고 초기화시키기
-        //Debug.Log("virtual function");
         int[] tempvolumn;
 
         tempvolumn = DataManager.GetComponent<ControlGameData>().getVolumn();
@@ -89,7 +88,6 @@ public class SettingScript : CommonJob
     //배경음악인지 효과음인지
     public void changeCategory(string dir)
     {
-        Debug.Log(categoryIndex);
         if (dir == "Left" && categoryIndex != 0)
             categoryIndex--;
         else if (dir == "Right" && categoryIndex != 1)
@@ -113,7 +111,6 @@ public class SettingScript : CommonJob
 
     public void changeVolumn(string dir)
     {
-        Debug.Log("This is before changed val and it is " + volumn[stageIndex][categoryIndex]);
         if (dir == "Up" && volumn[stageIndex][categoryIndex] != 9)
         {
             if (volumn[stageIndex][categoryIndex] == 0)
@@ -131,14 +128,11 @@ public class SettingScript : CommonJob
             if (volumn[stageIndex][categoryIndex] == 4)
                 volumn[stageIndex][categoryIndex] = 0;
         }
-        Debug.Log("I'm changed and changed val is " + volumn[stageIndex][categoryIndex]);
         appearVolumn();
     }
 
     void appearVolumn()
     {
-        //Debug.Log(stageIndex + " " + categoryIndex);
-        //Debug.Log(volumn[stageIndex][categoryIndex]);
         int nowvolumn = volumn[stageIndex][categoryIndex] % 5; //--> 0/0,1,2,3,4
         for (i = 0; i < 5; i++)
         {

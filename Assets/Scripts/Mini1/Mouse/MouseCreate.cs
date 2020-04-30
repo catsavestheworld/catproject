@@ -38,7 +38,6 @@ public class MouseCreate : MonoBehaviour {
             Mouse.transform.position = rdpos[Random.Range(0, 5)];
             Mouse.SetActive(true);
             create_time = Random.Range(5, 21);
-            Debug.Log(create_time);
         if (gameObject.activeInHierarchy)
             StartCoroutine("MouseON");
     }

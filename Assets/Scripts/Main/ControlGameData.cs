@@ -80,9 +80,6 @@ public class ControlGameData : MonoBehaviour
         string[] f_volumn = PlayerPrefs.GetString("Volumn", "99/99/99/99").Split('/');
         string[] f_bestscore = PlayerPrefs.GetString("BestScore", "0/0/0/0").Split('/');
 
-        Debug.Log("f_furniture len is "+f_furniture.Length+"and f_furniture is ");
-        Debug.Log(f_furniture);
-
         for (i = 0; i < playnum.Length; i++)
         {
             playnum[i] = int.Parse(f_playnum[i]);
@@ -91,9 +88,7 @@ public class ControlGameData : MonoBehaviour
 
         for (i = 0; i < puzzle.Length; i++)
         {
-            //Debug.Log(puzzle.Length);
             puzzle[i] = int.Parse(f_puzzle[i]);
-            //Debug.Log(puzzle[i]);
         }
 
         for (i = 0; i < buycat.Length; i++)

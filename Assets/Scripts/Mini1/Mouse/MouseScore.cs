@@ -22,8 +22,6 @@ public class MouseScore : MonoBehaviour {
 
     void OnMouseDown()
     {
-       
-            Debug.Log("쥐 클릭인식");
             count++;
             localpos = gameObject.transform.position;
             localpos.x = 16f;

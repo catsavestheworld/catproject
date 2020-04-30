@@ -30,8 +30,6 @@ public class Cat_interact : MonoBehaviour
             }
         }
 
-        //Debug.Log(catInteractSpr[0][0][1].name);
-
         AudioManager = GameObject.Find("AudioManager");
         catmeow = AudioManager.GetComponent<Main_AudioManager>().Cat_Meow;
 
@@ -44,8 +42,6 @@ public class Cat_interact : MonoBehaviour
         AudioManager.GetComponent<Main_AudioManager>().changeVolumn();
         volVector = AudioManager.GetComponent<Main_AudioManager>().effectVector;
         effectvolume = AudioManager.GetComponent<Main_AudioManager>().effectVol;
-
-        //Debug.Log("in setting, volvector is " + volVector + "and effectvolume is " + effectvolume);
     }
 
     public void getreaction_Cat(GameObject cat, int catnum, int posnum)
@@ -56,14 +52,10 @@ public class Cat_interact : MonoBehaviour
 
     IEnumerator sprchange(GameObject cat, int catnum, int posnum)
     {
-        Debug.Log("hi??");
         int i = Random.Range(0, catmeow.Length);
         if (effectvolume != 0)
             AudioSource.PlayClipAtPoint(catmeow[i], volVector);
-        Debug.Log("CATNUM IS " + catnum);
-        Debug.Log("posnum is " + posnum);
         cat.GetComponent<SpriteRenderer>().sprite = catInteractSpr[catnum][posnum][1];
-        //Debug.Log(catInteractSpr[catnum][0][1].name);
         yield return new WaitForSeconds(0.5f);
         cat.GetComponent<SpriteRenderer>().sprite = catInteractSpr[catnum][posnum][0];
 

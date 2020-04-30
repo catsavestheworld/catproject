@@ -15,8 +15,6 @@ public class FeverMoveMonster : MonoBehaviour {
 
     public IEnumerator BackMove()
     {
-        
-            //Debug.Log("BackMove");
             if (gameObject.transform.position.x >= 17)
             {
                 pos = gameObject.transform.position;

@@ -104,7 +104,6 @@ public class FeverTime : MonoBehaviour
         if (other.gameObject.name == "Falling" && fevercall == false)
         {
             fevercall = true;
-            Debug.Log("stayfor3sec");
             StartCoroutine("TimeExpand");            
         }
     }   

@@ -19,7 +19,6 @@ public class MiniGame_returnTouch : MonoBehaviour {
             GameManager.GetComponent<MiniGameScript>().goout();
         else
         {
-            Debug.Log("scene index is "+(int.Parse(Objname.Substring(0, 1)) - 1));
             GameManager.GetComponent<MiniGameScript>().playGame(int.Parse(Objname.Substring(0, 1))-1);
         }
     }

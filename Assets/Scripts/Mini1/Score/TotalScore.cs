@@ -39,7 +39,6 @@ public class TotalScore : MonoBehaviour {
         total_score = GameObject.Find("score_Total").GetComponent<Text>();
         best_score = GameObject.Find("score_Best").GetComponent<Text>();
 
-        Debug.Log("feverscore"+FeverScore.name);
         total_score.text = "score : 0";
 
         appliedEffect = DataManager.GetComponent<GetCatEffect>().SettingCatEffect();
@@ -55,11 +54,8 @@ public class TotalScore : MonoBehaviour {
 	
     public void FScore()
     {
-        Debug.Log("FScore is loaded");
         int tempF;
-        Debug.Log(FeverScore.name);
         tempF = FeverScore.GetComponent<FeverScore>().Fscore;
-        Debug.Log("bonusAfterFever is " + bonusAfterFever);
         GameManager.GetComponent<TimeScore>().time += tempF * 7 + bonusAfterFever ;
     }
 
@@ -77,12 +73,8 @@ public class TotalScore : MonoBehaviour {
 
         money = DataManager.GetComponent<ControlGameData>().getMoney();
         totalS = (int)((mainS + mouseS * 100 )* bonusAfterGame);
-
-        //Debug.Log("bonusAftergame is " + bonusAfterGame);
-        //Debug.Log("jackpot is " + jackpot);
    
         int i = Random.Range(0, 100);
-        //Debug.Log("i is" + i);
         if (i < 5)
             totalS *= jackpot;
 
@@ -92,7 +84,6 @@ public class TotalScore : MonoBehaviour {
 
         if (bestScore < totalS)
         {
-            //Debug.Log("bestScore");
             bestScore = totalS;
             bestScorearr[0] = (int)bestScore;
             DataManager.GetComponent<ControlGameData>().setBestScore(bestScorearr);

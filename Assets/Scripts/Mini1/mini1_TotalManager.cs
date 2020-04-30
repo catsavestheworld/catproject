@@ -69,10 +69,6 @@ public class mini1_TotalManager : MonoBehaviour {
         DataManager = GameObject.Find("DataManager");
         appliedEffect = DataManager.GetComponent<GetCatEffect>().SettingCatEffect();
 
-        //Debug.Log("appliedEffect[0]" + appliedEffect[0]);
-        //Debug.Log("appliedEffect[6]" + appliedEffect[6]);
-
-
         feverPlayTime = 0 + (int)appliedEffect[4];//
         gamePlayTime = 0 + (int)appliedEffect[1];//
         bonusWhileGame = (int)appliedEffect[2]; //끗
@@ -94,9 +90,6 @@ public class mini1_TotalManager : MonoBehaviour {
         gametime = 30 +gamePlayTime;
         fevertime = 5 + feverPlayTime;
 
-        //Debug.Log("gamePlaytime is " + gamePlayTime);
-        //Debug.Log("feverPlaytime is " + feverPlayTime);
-
         StartCoroutine(GameManager.GetComponent<TimeScore>().CountScore());
         StartCoroutine("CheckTime");
     }
@@ -112,9 +105,7 @@ public class mini1_TotalManager : MonoBehaviour {
 
         if(time == 15)
         {
-            //Debug.Log("time is " + GameManager.GetComponent<TimeScore>().time + "and bonus while game is" + bonusWhileGame);
             GameManager.GetComponent<TimeScore>().time += bonusWhileGame;
-            //Debug.Log("time is " + GameManager.GetComponent<TimeScore>().time);
             GameManager.GetComponent<TimeScore>().BScore();
 
         }

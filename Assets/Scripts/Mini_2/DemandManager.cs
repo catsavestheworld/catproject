@@ -230,7 +230,6 @@ public class DemandManager : MonoBehaviour
         indexnum = (int)Random.Range(0, 3);
         demandObject.GetComponent<SpriteRenderer>().sprite = demandSprite[indexnum];
         nowDownScale = true;
-        //Debug.Log("In " + gameObject.name + ", it's instance id is"+gameObject.GetInstanceID()+ "nowdownscale is " + nowDownScale);
         yield return new WaitForSeconds(demandTime);
         DarkDemandSetting();
         indexnum = -1;

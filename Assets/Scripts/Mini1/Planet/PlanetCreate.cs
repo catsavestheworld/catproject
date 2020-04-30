@@ -72,9 +72,6 @@ public class PlanetCreate : MonoBehaviour
     public IEnumerator planetON()//랜덤으로 행성 하나 켜기
     {
         yield return new WaitForSeconds(seconds);
-
-         //   Debug.Log("PlanetOn called and secondes is " + seconds);
-
             rdnum = Random.Range(0, 9);
        
         while(rdnum == temp) //전이랑 중복되는 숫자 안하려고...

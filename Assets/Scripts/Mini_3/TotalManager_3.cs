@@ -59,14 +59,7 @@ public class TotalManager_3 : MonoBehaviour
         bonusAfterFever = (int)appliedEffect[3]; //FeverTime
         //게임 끝나고 5퍼 확률로 2배 
         jackpot = (int)appliedEffect[5];//UIManager
-
-        Debug.Log("bonusaftergame is " + bonusAfterGame);
-        Debug.Log("feverPlaytime is" + feverPlayTime);
-        Debug.Log("gameplaytime is " + gamePlayTime);
-        Debug.Log("bonuswhilegame is " + bonusWhileGame);
-        Debug.Log("bonusafterfever is " + bonusAfterFever);
-        Debug.Log("jackpot is " + jackpot);
-
+        
         mainGame = GameObject.Find("MainGame");
         feverTime = GameObject.Find("FeverTime");
         feverPresent = GameObject.Find("feverPresent");

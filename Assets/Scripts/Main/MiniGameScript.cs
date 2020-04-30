@@ -27,7 +27,6 @@ public class MiniGameScript : CommonJob
     public override void Start()
     {
         base.Start();
-        //Debug.Log("minigamescript start method");
 
         IntroObj = GameObject.Find("Intro_Story");
         selectObj = GameObject.Find("MiniGame_Select");
@@ -40,7 +39,6 @@ public class MiniGameScript : CommonJob
         HowtoObj = GameObject.Find("MiniGame_Howto");
         HowtoArrow[0] = GameObject.Find("Howto_RightArrow");
         HowtoArrow[1] = GameObject.Find("Howto_LeftArrow");
-        //HowtoExit = GameObject.Find("Howto_Goout");
 
         for(int i = 0; i < HowtoSpr.Length; i++)
         {
@@ -52,8 +50,6 @@ public class MiniGameScript : CommonJob
 
         }
 
-        //Debug.Log("start method_mainmanager name is " + MainManager.name);
-
         scene[0] = "Mini_1";
         scene[1] = "Mini_2";
         scene[2] = "Mini_3";
@@ -61,15 +57,12 @@ public class MiniGameScript : CommonJob
         HowtoObj.SetActive(false);
 
         selectObj.SetActive(false);
-        //IntroObj.SetActive(false);
 
     }
 
     public override void initial()
     {
-        //Debug.Log("initial function from minigamescript");
         //각 미니게임별 플레이 횟수를 읽어오기
-        //Debug.Log(MainManager.name);
         selectObj.SetActive(true);
         playnum = DataManager.GetComponent<ControlGameData>().getPlaynum();
 
@@ -87,13 +80,8 @@ public class MiniGameScript : CommonJob
     }
 
     public void showAnotherspr(string dir)
-    {/*
-        HowtoArrow[sprIndex].SetActive(false);
-        sprIndex = (sprIndex + 1) % 2;
-        HowtoObj.GetComponent<SpriteRenderer>().sprite = HowtoSpr[nowHowto][0];
-        HowtoArrow[sprIndex].SetActive(true);
-
-        */
+    {
+        
         switch (dir)
         {
             case "LeftArrow":
@@ -160,7 +148,6 @@ public class MiniGameScript : CommonJob
     //x표 클릭한 경우 --> goout
     public void goout()
     {
-        Debug.Log(selectObj.name);
         selectObj.SetActive(false);
         finish();
     }

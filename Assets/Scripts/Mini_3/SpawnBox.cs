@@ -89,7 +89,6 @@ public class SpawnBox : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
 
             StartCoroutine("OrganizeTube");
-            Debug.Log("Done");
             yield return new WaitForSeconds(1.9f);
             
             feverTimeFrame.SetActive(false);            

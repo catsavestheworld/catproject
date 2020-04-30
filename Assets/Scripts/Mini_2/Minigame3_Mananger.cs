@@ -53,7 +53,6 @@ public class Minigame3_Mananger : MonoBehaviour {
 
     private void Awake()
     {
-        //Debug.Log("minigame3manager");
         AudioManager = GameObject.Find("AudioManager");
         AudioManager.GetComponent<Main_AudioManager>().setting();
 
@@ -78,25 +77,12 @@ public class Minigame3_Mananger : MonoBehaviour {
 
         appliedEffect = DataManager.GetComponent<GetCatEffect>().SettingCatEffect();
 
-       //Debug.Log("appliedEffect[0]" + appliedEffect[0]);
-        //Debug.Log("appliedEffect[6]" + appliedEffect[6]);
-
         bonusAfterGame = 1 + appliedEffect[0] + appliedEffect[6];
         feverPlayTime = 0 + (int)appliedEffect[4];
         gamePlayTime = 0 + (int)appliedEffect[1];
         bonusWhileGame = (int)appliedEffect[2];
         bonusAfterFever = (int)appliedEffect[3];
         jackpot = (int)appliedEffect[5];
-
-        /*
-        Debug.Log("bonusaftergame is " + bonusAfterGame);
-        Debug.Log("feverPlaytime is" + feverPlayTime);
-        Debug.Log("gameplaytime is " + gamePlayTime);
-        Debug.Log("bonuswhilegame is " + bonusWhileGame);
-        Debug.Log("bonusafterfever is " + bonusAfterFever);
-        Debug.Log("jackpot is " + jackpot);
-        //appliedEffect[0] 
-        */
 
         GameManager = GameObject.Find("GameManager");
         if (bonusWhileGame != 0)
@@ -202,7 +188,6 @@ public class Minigame3_Mananger : MonoBehaviour {
         FeverTime.SetActive(false);
 
         Game.SetActive(true);
-        Debug.Log("invokecoroutine calling");
         Game.GetComponent<InvokeCoroutine>().InvokingCoroutine();
     }
 
@@ -228,11 +213,8 @@ public class Minigame3_Mananger : MonoBehaviour {
 
     public void calculFinalScore()
     {
-        Debug.Log("final score is " + (normalscore + speacialscore * 7) + "and bonusAfterGame is "+bonusAfterGame+", jackpot is ");
-
         finalScore = (normalscore + speacialscore * 7) * bonusAfterGame;
         int i = Random.Range(0, 100);
-        Debug.Log("jackpot possible?" + jackpot);
         if (i < 5)
             finalScore *= jackpot;
     }

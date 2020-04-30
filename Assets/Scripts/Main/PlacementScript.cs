@@ -144,7 +144,6 @@ public class PlacementScript : MonoBehaviour
         //설치 가능한 고양이 몇 마리인지 설정+설치 가능한 공간 몇 군데인지 마저 설정
         for (i = 0; i < 9; i++)
         {
-            // Debug.Log(i);
             if (i == 0)
                 nowIndex[i] = furniture_alloc[i];
             else
@@ -186,13 +185,11 @@ public class PlacementScript : MonoBehaviour
             else if (buycat[i] != 1)
                 catObj[i].SetActive(false);
 
-            //Debug.Log(allocation);
         }
 
         //고양이 배치 설정
         for (i = 0; i < 8; i++)
         {
-            //Debug.Log(buycat[i]);
             //고양이가 배치 설정 된 고양이일 경우에만
             if (buycat[i] == 1)
             {

@@ -108,7 +108,6 @@ public class UIManager : MonoBehaviour
     IEnumerator FeverSetting()
     {
         yield return new WaitForSeconds(playTime);
-        Debug.Log("Fever");
         StopCoroutine("SetScore");        
         GameObject.Find("Warehouse").GetComponent<SpawnBox>().StopBox();
 		yield return new WaitForSeconds(feverTime+feverPlayTime);
@@ -180,7 +179,6 @@ public class UIManager : MonoBehaviour
 
         if (bestScore < totalScore)
         {
-            //Debug.Log("bestScore");
             bestScore = totalScore;
             bestScorearr[2] = bestScore;
             DataManager.GetComponent<ControlGameData>().setBestScore(bestScorearr);

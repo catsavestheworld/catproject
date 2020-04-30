@@ -46,7 +46,6 @@ public class AppearScore : MonoBehaviour {
 
         bestScorearr = DataManager.GetComponent<ControlGameData>().getBestScore();
         bestScore = bestScorearr[1];
-        //Debug.Log(bestScore);
 
         finalScore = (int)GameManager.GetComponent<Minigame3_Mananger>().finalScore;
 
@@ -56,7 +55,6 @@ public class AppearScore : MonoBehaviour {
         //best score의 경우는 여기서 save 진행.
         if (bestScore < finalScore)
         {
-            //Debug.Log("bestScore");
             bestScore = finalScore;
             bestScorearr[1] = bestScore;
             DataManager.GetComponent<ControlGameData>().setBestScore(bestScorearr);

@@ -108,7 +108,6 @@ public class TotalManager : MonoBehaviour
                 break;
 
         }
-        //Debug.Log(Handle.GetComponent<Image>().color);
         float barsize;
         if (TotalFurNum >= 12)
             barsize = 1;
@@ -121,9 +120,7 @@ public class TotalManager : MonoBehaviour
 
     public IEnumerator GameBonus()
     {
-        Debug.Log("hI!!!!");
         yield return new WaitForSeconds(15f);
-        Debug.Log("wAIT IS OVER");
         MiniGame3_Manager.GetComponent<Minigame3_Mananger>().normalscore += 30;
         MiniGame3_Manager.GetComponent<Minigame3_Mananger>().showNormalscore();
 

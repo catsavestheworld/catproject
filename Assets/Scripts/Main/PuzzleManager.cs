@@ -139,7 +139,6 @@ public class PuzzleManager : MonoBehaviour
             if (tempPuzzle[i] == 0) //아직 퍼즐이 없는 조각이라면
             {
                 puzzleList.Add(i); //리스트에 해당 인덱스 추가 추가
-                //Debug.Log(puzzleList.in)
             }
             else //조각이 있는 퍼즐이면 퍼즐 개수 추가
                 havingPuzzle++;
@@ -163,8 +162,6 @@ public class PuzzleManager : MonoBehaviour
                     returnval = tempPuzzle[i] * exp + returnval;
                     exp *= 2;
                 }
-
-                //Debug.Log(returnval);
 
                 datapuzzle[sceneIndex + 1] = returnval;
 

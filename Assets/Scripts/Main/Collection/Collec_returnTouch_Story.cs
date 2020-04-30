@@ -16,10 +16,8 @@ public class Collec_returnTouch_Story : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        Debug.Log("IN ONMOUSEDOWN, ");
         sprname = gameObject.GetComponent<SpriteRenderer>().sprite.name;
         index = int.Parse(sprname.Substring(sprname.Length - 1));
-        Debug.Log(index);
         CollecManager.GetComponent<CollectionScript>().showStory(index);
     }
 }

@@ -89,12 +89,9 @@ public class CatManager : MonoBehaviour
 
     public IEnumerator appearCat()
     {
-        Debug.Log("appearcat started" + waitTime);
         if (nowCat == 8)
             StopCoroutine("appearCat");
 
-
-        Debug.Log("nowcat is " + nowCat);
         if (nowCat != 8)
         {
             nowWait = true;

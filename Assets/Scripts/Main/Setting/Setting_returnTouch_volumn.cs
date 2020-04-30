@@ -17,7 +17,6 @@ public class Setting_returnTouch_volumn : MonoBehaviour {
     {
         objName = gameObject.name;
         objName = objName.Substring(10);
-        Debug.Log(objName);
         SettingManager.GetComponent<SettingScript>().changeVolumn(objName);
     }
 }

@@ -16,7 +16,6 @@ public class Setting_returnTouch_Category : MonoBehaviour {
     void OnMouseDown () {
         objName = gameObject.name;
         objName = objName.Substring(8);
-        Debug.Log(objName);
         SettingManager.GetComponent<SettingScript>().changeCategory(objName);
 	}
 }

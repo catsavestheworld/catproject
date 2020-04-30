@@ -33,27 +33,9 @@ public class ColliderCheck : MonoBehaviour {
         mouse_get = AudioManager.GetComponent<Main_AudioManager>().mouse_get;
     }
 
-    /*
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        switch (collision.tag)
-        {
-            case "Wall1":
-                Debug.Log(this.transform.position);
-                this.transform.position = new Vector3(this.transform.position.x, 5f, 0);
-                break;
 
-            case "Wall2":
-                Debug.Log(this.transform.position);
-                this.transform.position = new Vector3(this.transform.position.x, -5f, 0);
-                break;
-        }
-
-    }
-    */
     void OnTriggerEnter2D(Collider2D col)
     {
-        //Debug.Log(col.gameObject.name);
 
         switch (col.gameObject.tag)
         {
@@ -81,19 +63,6 @@ public class ColliderCheck : MonoBehaviour {
 
                 TotalManager.GetComponent<mini1_TotalManager>().GameOver();
                 break;
-
-
-                /*
-            case "Wall1":
-                Debug.Log(this.transform.position);
-                this.transform.position = new Vector3(this.transform.position.x,5f,0);
-                break;
-
-            case "Wall2":
-                Debug.Log(this.transform.position);
-                this.transform.position = new Vector3(this.transform.position.x, -5f, 0);
-                break;
-                */
         }
 
       

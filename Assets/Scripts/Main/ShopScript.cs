@@ -114,7 +114,6 @@ public class ShopScript : CommonJob
         sealSpr = Resources.Load<Sprite>("Main/ShopSprite/seal_bought");
         lockedSpr = Resources.Load<Sprite>("Main/ShopSprite/seal_locked");
         unlockwaySpr = Resources.Load<Sprite>("Main/ShopSprite/Message_unlockcondition");
-        //Debug.Log(sealSpr.name);
 
         Shop_Background = GameObject.Find("Shop_Main"); // 
         SelectObj = GameObject.Find("Base_Shop");
@@ -130,7 +129,6 @@ public class ShopScript : CommonJob
         InsufficientObj.SetActive(false);
         SelectObj.SetActive(false);
         Shop_Background.SetActive(false);
-        //Debug.Log("hi");
     }
 
     //데이터를 읽어오고 초기화시키기
@@ -238,7 +236,6 @@ public class ShopScript : CommonJob
                     seal_Buy[i].GetComponent<SpriteRenderer>().sprite = sealSpr;
                 else
                     seal_Buy[i].GetComponent<SpriteRenderer>().sprite = null;
-                //Debug.Log(i + ", " + index);
             }
         }
         else if (want_furniture == true)
@@ -320,7 +317,6 @@ public class ShopScript : CommonJob
     //해당 오브젝트의 설명을 끔 
     public void offObjinfo()
     {
-        Debug.Log("OffObjInfo");
         //해당 오브젝트 꺼주기
         InfoObj.SetActive(false);
         LockObj.SetActive(false);
@@ -332,9 +328,6 @@ public class ShopScript : CommonJob
     public void buyObj(string clickedSpr)
     {
         //해당 오브젝트의 sprite 체크를 통해서 인덱스 받아옴
-        //string spritename = clickedObj.GetComponent<SpriteRenderer>().sprite.name;
-        //int sprindex = int.Parse(spritename.Substring(spritename.Length - 1));
-        //Debug.Log(effectvolume);
 
         int sprindex = int.Parse(clickedSpr.Substring(clickedSpr.Length - 1));
 
@@ -355,8 +348,6 @@ public class ShopScript : CommonJob
             else
             {
                 // Show insufficient object for a second
-                Debug.Log("There is no money!");
-                Debug.Log("obj name is " + InsufficientObj.name);
                 turnOffCollider();
                 InsufficientObj.SetActive(true);
                 if (effectvolume != 0){
@@ -396,12 +387,10 @@ public class ShopScript : CommonJob
     //몇번째 고양이를 산 건지 인덱스로 넘겨준다.
     void ShowObjSeal(int index)
     {
-        Debug.Log(index);
         for (i = 0; i < 4; i++)
         {
             if(index%4 == i)   
                 seal_Buy[i].GetComponent<SpriteRenderer>().sprite = sealSpr;
-            //Debug.Log(i + ", " + index);
         }
     }
 
@@ -413,7 +402,6 @@ public class ShopScript : CommonJob
     //선택 과정에서 오류 없도록 콜라이더 꺼 주는 작업 수행
     void turnOffCollider()
     {
-        Debug.Log("turnoff the collider");
         backButton.GetComponent<BoxCollider2D>().enabled = false;
         for (i = 0; i < 2; i++)
         {
@@ -430,7 +418,6 @@ public class ShopScript : CommonJob
     //꺼줬던 콜라이더 켜 주는 작업 수행
     void turnOnCollider()
     {
-        Debug.Log("turn on  the collider");
         backButton.GetComponent<BoxCollider2D>().enabled = true;
         for (i = 0; i < 2; i++)
         {

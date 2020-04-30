@@ -8,13 +8,6 @@ public class Main_ArrowScript : MonoBehaviour {
 	void Start () {
         MainManager = GameObject.Find("MainManager");
 	}
-
-    // Update is called once per frame
-    /*private void OnMouseOver()
-    {
-        //Debug.Log(gameObject.name);
-    }*/
-
     private void OnMouseDown()
     {
         MainManager.GetComponent<ChangeCameraPos>().ChangePos();

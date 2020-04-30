@@ -61,7 +61,6 @@ public class Main_AudioManager : MonoBehaviour
         
         audioPlay = gameObject.GetComponent<AudioSource>();
         DataManager = GameObject.Find("DataManager");
-        //Debug.Log("Awake called");
 
         //bgm
         MainBGM = Resources.Load<AudioClip>("Sounds/Main/Main_BGM");
@@ -75,7 +74,6 @@ public class Main_AudioManager : MonoBehaviour
         Cat_Meow[0] = Resources.Load<AudioClip>("Sounds/Main/Cat_meow_0");
         Cat_Meow[1] = Resources.Load<AudioClip>("Sounds/Main/Cat_meow_1");
         Cat_Meow[2] = Resources.Load<AudioClip>("Sounds/Main/Cat_meow_2");
-        //Debug.Log(Cat_Meow.Length);
 
         //mini1 effect
         cat_hit = Resources.Load<AudioClip>("Sounds/Mini1/Mini1_hit");
@@ -92,11 +90,6 @@ public class Main_AudioManager : MonoBehaviour
         PresentClicking = Resources.Load<AudioClip>("Sounds/Mini3/PresentClicking");
         PutBoxDown = Resources.Load<AudioClip>("Sounds/Mini3/PutBoxDown"); ;
         CatCrying = cat_feelingGood;
-
-
-
-        //audioPlay.clip = MainBGM;
-        //Debug.Log(SceneManager.GetActiveScene().name);
 
         switch (SceneManager.GetActiveScene().name)
         {
@@ -157,25 +150,18 @@ public class Main_AudioManager : MonoBehaviour
 
         changeVolumn();
         audioPlay.Play();
-        /*
-        Debug.Log("audiomanager");
-        changeVolumn();
-        audioPlay.Play();
-        */
     }
 
     public void changeVolumn()
     {
         int[] tempvolumn;
 
-        //DataManager.GetComponent<ControlGameData>().Load();
         tempvolumn = DataManager.GetComponent<ControlGameData>().getVolumn();
 
         for (int i = 0; i < 4; i++)
         {
             volumn[i][0] = tempvolumn[i] / 10; // 배경음악 볼륨
             volumn[i][1] = tempvolumn[i] % 10; // 효과음 볼륨
-            //Debug.Log(tempvolumn[i] + " " + volumn[i][0]);
         }
 
         bgmVol = volumn[nowScene][0]; // --> 5,6,7,8,9 vol%5+1

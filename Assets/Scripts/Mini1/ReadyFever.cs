@@ -31,7 +31,6 @@ public class ReadyFever : MonoBehaviour
 
         if (Player.transform.position.y > 0)
         {
-            Debug.Log("y");
             Player.transform.position = pos_t;
             StartCoroutine(FeverPlayer.GetComponent<FeverMovePlayer>().Move_1());
         }

@@ -18,7 +18,6 @@ public class Collec_returnTouch_Goods : MonoBehaviour {
     {
         sprname = gameObject.GetComponent<SpriteRenderer>().sprite.name;
         index = int.Parse(sprname.Substring(sprname.Length - 1));
-        Debug.Log(index);
         CollecManager.GetComponent<CollectionScript>().showInfo(index);
     }
 }

@@ -14,7 +14,6 @@ public class MoveMonster : MonoBehaviour {
 
 	public IEnumerator Move()
     {
-            //Debug.Log("Move");
             if (gameObject.transform.position.x <= 10)
             {
                 pos = gameObject.transform.position;

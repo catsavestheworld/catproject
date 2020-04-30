@@ -16,7 +16,6 @@ public class Collec_returnTouch_Category : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        //Debug.Log("checked");
         sprname = gameObject.GetComponent<SpriteRenderer>().sprite.name;
         sprname = sprname.Substring(sprname.Length - 1);
         if (sprname == "C")

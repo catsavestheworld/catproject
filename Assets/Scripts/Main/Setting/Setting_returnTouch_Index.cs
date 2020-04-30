@@ -18,7 +18,6 @@ public class Setting_returnTouch_Index : MonoBehaviour {
     {
         objName = gameObject.name;
         objName = objName.Substring(10);
-        Debug.Log(objName);
         SettingManager.GetComponent<SettingScript>().changeStage(objName);
     }
 }

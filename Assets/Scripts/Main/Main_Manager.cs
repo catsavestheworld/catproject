@@ -47,7 +47,6 @@ public class Main_Manager : MonoBehaviour
     {
         MenuObj.SetActive(true);
         turnOnCollider();
-        Debug.Log("nowactiveindex is " + nowactiveIndex);
         realFurObj[nowactiveIndex].SetActive(false);
         nowactiveIndex = -1;
     }
