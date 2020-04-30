@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 23a8acf4a87f8a34e8cf3ce447291467
+=======
+guid: e6f2dddc45cef364597d670ed939f367
+>>>>>>> 62ff63c... add untracked file
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
