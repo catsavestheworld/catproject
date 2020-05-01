@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ChangeCameraPos : MonoBehaviour
 {
 
+    public GameObject Story;
+
     GameObject[] Arrow = new GameObject[2];
     GameObject Camera;
     GameObject DataManager;
@@ -55,6 +57,7 @@ public class ChangeCameraPos : MonoBehaviour
             for(int i=0;i<MainObj.Length;i++){
                 MainObj[i].transform.Translate(+21f, 0, 0);
             }
+            Story.transform.Translate(+21f, 0, 0);
         }
         else
         {
@@ -63,6 +66,7 @@ public class ChangeCameraPos : MonoBehaviour
             for(int i=0;i<MainObj.Length;i++){
                 MainObj[i].transform.Translate(-21f, 0, 0);
             }
+            Story.transform.Translate(-21f, 0, 0);
         }
 
         CatObj.GetComponent<Cat_interact>().CatVolSetting();

@@ -97,3 +97,6 @@ TagManager:
   - name: pause
     uniqueID: 2221588627
     locked: 0
+  - name: info
+    uniqueID: 234816309
+    locked: 0

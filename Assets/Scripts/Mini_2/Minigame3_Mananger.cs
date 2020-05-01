@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Minigame3_Mananger : MonoBehaviour {
 
+    public GameObject gameUI;
     public GameObject pauseBut;
 
     GameObject AudioManager;
@@ -194,6 +195,7 @@ public class Minigame3_Mananger : MonoBehaviour {
     public void callGameover()
     {
         GameOver.SetActive(true);
+        gameUI.SetActive(false);
         calculFinalScore();
         GameOverScore.GetComponent<AppearScore>().setFinalScore();
         Game.SetActive(false);

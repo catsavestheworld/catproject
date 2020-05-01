@@ -17,6 +17,8 @@ public class Main_Manager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Time.timeScale = 1;
+
         MenuObj = GameObject.Find("Menu");
         AudioManager = GameObject.Find("AudioManager");
 

@@ -3935,7 +3935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -173}
+  m_AnchoredPosition: {x: 0, y: -165}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &573642010
@@ -3959,10 +3959,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 89abd5eec98699d42bbb0aabb5719f36, type: 3}
-    m_FontSize: 90
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 7
+    m_MinSize: 0
     m_MaxSize: 90
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -5047,8 +5047,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -685, y: 242}
-  m_SizeDelta: {x: 1920, y: 100}
+  m_AnchoredPosition: {x: -364, y: 126}
+  m_SizeDelta: {x: 1920, y: 95.3}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1009353409
 MonoBehaviour:
@@ -5088,10 +5088,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 89abd5eec98699d42bbb0aabb5719f36, type: 3}
-    m_FontSize: 73
+    m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 7
+    m_MinSize: 0
     m_MaxSize: 90
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -6819,9 +6819,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1653332261
-  m_SortingLayer: 15
-  m_SortingOrder: 0
+  m_SortingLayerID: 234816309
+  m_SortingLayer: 18
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 006f308a424193c4d9f4f90026f81aca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8595,9 +8595,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1150053011
-  m_SortingLayer: 16
-  m_SortingOrder: 0
+  m_SortingLayerID: 234816309
+  m_SortingLayer: 18
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 962a0230429f6ee4fa3a49dc8e55aef5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10361,6 +10361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9ffbf813dc7f34188fac1cce7237e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Story: {fileID: 1145634328}
 --- !u!114 &1819456244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10567,9 +10568,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1150053011
-  m_SortingLayer: 16
-  m_SortingOrder: 0
+  m_SortingLayerID: 234816309
+  m_SortingLayer: 18
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a0bbf473e0c23da46b58c3fd40bef834, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
