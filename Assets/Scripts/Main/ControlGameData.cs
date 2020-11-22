@@ -76,7 +76,8 @@ public class ControlGameData : MonoBehaviour
         string[] f_buycat = PlayerPrefs.GetString("Buycat", "-1/-1/-1/-1/-1/-1/-1/-1").Split('/');
         string[] f_furniture = PlayerPrefs.GetString("Furniture", "-1/-1/-1/-1/-1/-1/-1/-1/1").Split('/');
         string[] f_puzzle = PlayerPrefs.GetString("Puzzle", "0/0/0/0/0/0").Split('/');
-        int f_money = PlayerPrefs.GetInt("Money", 100000);
+        //int f_money = PlayerPrefs.GetInt("Money", 100000);
+        int f_money = PlayerPrefs.GetInt("Money", 0);
         string[] f_volumn = PlayerPrefs.GetString("Volumn", "99/99/99/99").Split('/');
         string[] f_bestscore = PlayerPrefs.GetString("BestScore", "0/0/0/0").Split('/');
 

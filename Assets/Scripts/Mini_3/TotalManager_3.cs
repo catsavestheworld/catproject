@@ -84,6 +84,7 @@ public class TotalManager_3 : MonoBehaviour
         feverTime.SetActive(false);
         gameOver.SetActive(false);
         feverTimeFrame.SetActive(false);
+        pauseBtn.SetActive(true);
     }
 
     //turn on FEVER
@@ -139,6 +140,7 @@ public class TotalManager_3 : MonoBehaviour
         gameOverScene.GetComponent<SpriteRenderer>().sprite = gameoverSpr[0];
         UIManager.GetComponent<UIManager>().CalcTotal();
         UIManager.SetActive(false);
+        pauseBtn.SetActive(false);
     }
 
     //when toy falls or go upward
@@ -150,5 +152,6 @@ public class TotalManager_3 : MonoBehaviour
         gameOverScene.GetComponent<SpriteRenderer>().sprite = gameoverSpr[1];
         UIManager.GetComponent<UIManager>().CalcTotal();
         UIManager.SetActive(false);
+        pauseBtn.SetActive(false);
     }
 }

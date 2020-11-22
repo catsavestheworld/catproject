@@ -147,10 +147,10 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.CatProject.CatProject
   buildNumber: {}
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 0
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
-  AndroidPreferredInstallLocation: 1
+  AndroidPreferredInstallLocation: 0
   aotOptions: 
   stripEngineCode: 1
   iPhoneStrippingLevel: 1
@@ -225,32 +225,32 @@ PlayerSettings:
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   appleEnableAutomaticSigning: 0
-  AndroidTargetDevice: 0
+  AndroidTargetDevice: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: '
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/bjiso/my_repo/catproject-master/rlskey.keystore
+  AndroidKeyaliasName: catworld
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
   m_AndroidBanners:
   - width: 320
     height: 180
-    banner: {fileID: 2800000, guid: 732115046528ada46b7aa156edaad4d4, type: 3}
+    banner: {fileID: 2800000, guid: 8a725d900c7f5a8419396a4a7600ccd9, type: 3}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 732115046528ada46b7aa156edaad4d4, type: 3}
+      m_Icon: {fileID: 2800000, guid: 8a725d900c7f5a8419396a4a7600ccd9, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
   - m_BuildTarget: Android
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 732115046528ada46b7aa156edaad4d4, type: 3}
+      m_Icon: {fileID: 2800000, guid: 8a725d900c7f5a8419396a4a7600ccd9, type: 3}
       m_Width: 192
       m_Height: 192
       m_Kind: 0
@@ -565,7 +565,8 @@ PlayerSettings:
   webGLCompressionFormat: 1
   scriptingDefineSymbols: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   incrementalIl2cppBuild: {}
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
